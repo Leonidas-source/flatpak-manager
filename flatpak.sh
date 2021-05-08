@@ -3,7 +3,7 @@ red="\e[0;91m"
 bold="\e[1m"
 reset="\e[0m"
 notify_user() {
-  flatpak remote-add -y --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+  flatpak --user remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
   clear
   for_user="flathub repo was added
   please procced to use flatpaks"
