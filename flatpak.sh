@@ -40,7 +40,7 @@ quit() {
 }
 update() {
   clear
-  flatpak --user update
+  flatpak --user -y update
   menu
 }
 run() {
