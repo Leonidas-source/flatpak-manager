@@ -55,7 +55,9 @@ run() {
 add() {
   clear
   bash /etc/profile.d/flatpak.sh
-  menu
+  clear
+  echo "Please reboot your system"
+  exit
 }
 check_repos() {
   command=$(flatpak --user remotes)
