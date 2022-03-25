@@ -12,8 +12,8 @@ remove() {
   clear
   flatpak list
   echo -e "${red}${bold}set flatpak to remove${reset}"
-  [ "$answr" == "" ] && menu
   read -r answr
+  [ "$answr" == "" ] && menu
   flatpak uninstall --user --delete-data -y "$answr"
   menu
 }
@@ -63,6 +63,33 @@ check_repos() {
   command=$(flatpak --user remotes)
   [ "$command" == "" ] && notify_user
 }
+repo() {
+  clear
+  echo "Set name for your new repository"
+  read answr
+  [ "$answr" == "" ] && menu
+  echo "Set location of your repository"
+  read location
+  [ "$location" == "" ] && menu
+  flatpak --user remote-add --if-not-exists $answr $location
+  menu
+}
+repo_list() {
+  clear
+  flatpak --user remotes
+  echo "Press enter to contitue"
+  read answr
+  menu
+}
+repo_delete() {
+  clear
+  flatpak --user remotes
+  echo "Set repository to remove"
+  read answr
+  [ "$answr" == "" ] && menu
+  flatpak --user remote-delete $answr
+  menu
+}
 menu() {
   clear
   check_repos
@@ -70,20 +97,26 @@ menu() {
   flatpak --user list
   echo -e "
   ${red}${bold}1) install flatpak
-  2) remove flatpak
-  3) run flatpak
-  4) update flatpaks
-  5) add flatpaks to your desktop menu
+  2) run flatpak
+  3) update flatpaks
+  4) add flatpaks to your desktop menu
+  5) remove flatpak
   6) remove orphans
-  7) exit${reset}"
+  7) list all the added repositories
+  8) add a remote flatpak repository
+  9) delete a remote flatpak repository
+  10) exit${reset}"
   read -r answr
   [ "$answr" == "1" ] && install
-  [ "$answr" == "2" ] && remove
-  [ "$answr" == "3" ] && run
-  [ "$answr" == "4" ] && update
-  [ "$answr" == "5" ] && add
+  [ "$answr" == "2" ] && run
+  [ "$answr" == "3" ] && update
+  [ "$answr" == "4" ] && add
+  [ "$answr" == "5" ] && remove
   [ "$answr" == "6" ] && orphans
-  [ "$answr" == "7" ] && quit
+  [ "$answr" == "7" ] && repo_list
+  [ "$answr" == "8" ] && repo
+  [ "$answr" == "9" ] && repo_delete
+  [ "$answr" == "10" ] && quit
   [ "$answr" == "" ] && quit
 }
 menu
