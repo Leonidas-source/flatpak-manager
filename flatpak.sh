@@ -49,7 +49,7 @@ run() {
   echo -e "${red}${bold}set flatpak to run${reset}"
   read -r answr
   [ "$answr" == "" ] && menu
-  flatpak run --user "$answr"
+  flatpak run --user "$answr" &
   menu
 }
 add() {
