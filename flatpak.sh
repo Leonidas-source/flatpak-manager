@@ -102,7 +102,7 @@ menu() {
   4) add flatpaks to your desktop menu
   5) remove flatpak
   6) remove orphans
-  7) list all the added repositories
+  7) list all added repositories
   8) add a remote flatpak repository
   9) delete a remote flatpak repository
   10) exit${reset}"
